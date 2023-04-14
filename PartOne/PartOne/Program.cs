@@ -9,7 +9,7 @@ namespace PartOne
 {
     class Global
     {
-        public static string recipe, displayRecipe, scaledRecipe, reset, clear, exitProgram;
+        //public static string recipe, displayRecipe, scaledRecipe, reset, clear, exitProgram;
 
         public static int mainMenuOption = 0;
     }

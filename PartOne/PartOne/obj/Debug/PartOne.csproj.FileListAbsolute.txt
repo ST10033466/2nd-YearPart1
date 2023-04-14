@@ -1,0 +1,8 @@
+C:\Users\USER\source\repos\PartOne\PartOne\bin\Debug\PartOne.exe.config
+C:\Users\USER\source\repos\PartOne\PartOne\bin\Debug\PartOne.exe
+C:\Users\USER\source\repos\PartOne\PartOne\bin\Debug\PartOne.pdb
+C:\Users\USER\source\repos\PartOne\PartOne\obj\Debug\PartOne.csproj.AssemblyReference.cache
+C:\Users\USER\source\repos\PartOne\PartOne\obj\Debug\PartOne.csproj.SuggestedBindingRedirects.cache
+C:\Users\USER\source\repos\PartOne\PartOne\obj\Debug\PartOne.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\PartOne\PartOne\obj\Debug\PartOne.exe
+C:\Users\USER\source\repos\PartOne\PartOne\obj\Debug\PartOne.pdb

@@ -56,7 +56,7 @@ namespace PartOne
                 catch (Exception e)
                 {
 
-                    Console.WriteLine("You have inputed a wrong option.");
+                    Console.WriteLine("You have to input a number.");
 
                 }
 
@@ -72,9 +72,9 @@ namespace PartOne
 
                     case 2:
 
-                        if (Recipe.NumOfIngri != 0)
+                        if (myRecipe.NumOfIngri != 0)
                         {
-                            Recipe.DisplayMenu();
+                            Recipe.DisplayMenu(myRecipe);
                         }
                         else
                         {
@@ -90,6 +90,13 @@ namespace PartOne
                         break;
                     case 6:
                         Environment.Exit(0);
+                        break;
+                    default:
+                        if(Global.MainMenuOption > 6) 
+                        {
+                            Console.WriteLine("You have inputted a number greater than 6 , try again! \n");
+                        }
+                         
                         break;
                 }
 

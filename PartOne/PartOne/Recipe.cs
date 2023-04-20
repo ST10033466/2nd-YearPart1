@@ -8,22 +8,20 @@ namespace PartOne
 {
     internal class Recipe
     {
-        class Global {
 
-            public static int numOfIngri;
-            public static int numOfSteps;
-            
-        }
-
+        private static int numOfIngri;
+        private static int numOfSteps;
         private static string[] nameIngri;
         private static string[] unitOfMeasure;
         private static string[] descripSteps;
 
         public static int[] Quantity { get; set; }
 
-        public string[] Name { 
-            get { return nameIngri; } 
-            set { nameIngri = value; } }
+        public string[] Name
+        {
+            get { return nameIngri; }
+            set { nameIngri = value; }
+        }
 
         public Recipe(string[] nameIngri, string[] unitOfMeasure, string[] descripSteps)
         {
@@ -36,30 +34,56 @@ namespace PartOne
         {
         }
 
-        public string[] Unit {
+        public string[] Unit
+        {
             get { return unitOfMeasure; }
-            set { unitOfMeasure = value; } }
-            
-
-        public string[] Description {
-            get { return descripSteps; } 
-            set { descripSteps = value; } }
+            set { unitOfMeasure = value; }
+        }
 
 
+        public string[] Description
+        {
+            get { return descripSteps; }
+            set { descripSteps = value; }
+        }
 
+        public static int NumOfIngri
+        {
+            get { return numOfIngri; }
+            set { numOfIngri = value; }
+        }
+        public static int NumOfSteps
+        {
+            get { return numOfSteps; }
+            set { numOfSteps = value; }
+        }
 
         public static void ingredients()
         {
             Console.WriteLine("How many Ingridents would you like to add?");
-            Global.numOfIngri = Convert.ToInt32(Console.ReadLine());
+
+            try
+            {
+                NumOfIngri = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.Write("Wrong input, Please input a number:  ");
+                
+                    NumOfIngri = Convert.ToInt32(Console.ReadLine());
+                
+                
+            }
 
 
-            Quantity = new int[Global.numOfIngri];
-            nameIngri = new string[Global.numOfIngri];
-            unitOfMeasure = new string[Global.numOfIngri];
-            
 
-            for (int i = 0; Global.numOfIngri > i; i++)
+
+            Quantity = new int[NumOfIngri];
+            nameIngri = new string[NumOfIngri];
+            unitOfMeasure = new string[NumOfIngri];
+
+
+            for (int i = 0; NumOfIngri > i; i++)
             {
 
                 Console.WriteLine("What is the name of ingridents " + (i + 1) + " ?");
@@ -78,11 +102,11 @@ namespace PartOne
             }
 
             Console.WriteLine("How many steps are there? ");
-            Global.numOfSteps = Convert.ToInt32(Console.ReadLine());
+            NumOfSteps = Convert.ToInt32(Console.ReadLine());
 
-            descripSteps = new string[Global.numOfSteps];
+            descripSteps = new string[NumOfSteps];
 
-            for (int i = 0; Global.numOfSteps > i; i++)
+            for (int i = 0; NumOfSteps > i; i++)
             {
                 Console.WriteLine("Step " + (i + 1));
                 descripSteps[i] = Console.ReadLine();
@@ -104,22 +128,22 @@ namespace PartOne
 
             Console.WriteLine("Ingredients");
             Console.WriteLine("************************");
-            Console.WriteLine("Number of Ingredients: " + Global.numOfIngri);
-            for (int j = 0; Global.numOfIngri > j; j++)
+            Console.WriteLine("Number of Ingredients: " + NumOfIngri);
+            for (int j = 0; NumOfIngri > j; j++)
             {
-                
+
                 Console.WriteLine("Name of Ingredient: " + nameIngri[j]);
                 Console.WriteLine("Quantity of Ingredient: " + Quantity[j]);
-                Console.WriteLine("Unit of Measurement: "+ unitOfMeasure[j]);
+                Console.WriteLine("Unit of Measurement: " + unitOfMeasure[j]);
             }
 
             Console.WriteLine("************************************");
-            Console.WriteLine("Step: "+ Global.numOfSteps);
-            for (int k = 0; Global.numOfSteps > k; k++)
+            Console.WriteLine("Step: " + NumOfSteps);
+            for (int k = 0; NumOfSteps > k; k++)
             {
-                Console.WriteLine("Step " + (k+1)+": "+ descripSteps[k]);
+                Console.WriteLine("Step " + (k + 1) + ": " + descripSteps[k]);
             }
-            
+
 
             Console.ReadKey();
 

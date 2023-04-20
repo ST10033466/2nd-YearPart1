@@ -9,9 +9,9 @@ namespace PartOne
 {
     class Global
     {
-        //public static string recipe, displayRecipe, scaledRecipe, reset, clear, exitProgram;
+        public static string Fullrecipe, DisplayingRecipe, ScaledIngredientQuantities, QuantitiesReset, ClearData, ExitProgram;
 
-        public static int mainMenuOption = 0;
+        public static int MainMenuOption = 0;
     }
 
 
@@ -30,8 +30,11 @@ namespace PartOne
 
 
         }
-            public static void Menu()
+        public static void Menu()
         {
+
+            Recipe myRecipe = new Recipe();
+
             //A do while loop create so the program can run untill the user exits the program
             do
             {
@@ -43,57 +46,59 @@ namespace PartOne
                     "4. Reset the quantity scaled\n" +
                     "5. Clear all data\n" +
                     "6. Exit program");
-                Global.mainMenuOption = Convert.ToInt32(Console.ReadLine());
 
-                Recipe myRecipe = new Recipe();
 
-           //     int len= myRecipe.Name.Length;
-
-                //If statement create to perform the actions of selected from the main menu option
-                if (Global.mainMenuOption == 1)
+                try
                 {
-
-                    //Calling the obect of the recipe class so it can perform the functions of the class.
-                    Recipe.ingredients();
-
+                    Global.MainMenuOption = Convert.ToInt32(Console.ReadLine());
                 }
-                else if (Global.mainMenuOption == 2)
-                {
-                    Recipe.DisplayMenu();
 
-                    Recipe.ingredients();
-
-                    //if (len.Equals(0))
-                    //{
-                    //    Console.WriteLine("You have not entered a recipe");
-
-                    //}
-                    //else { Recipe.DisplayMenu(); }
-
-
-                }
-                else if (Global.mainMenuOption == 3)
+                catch (Exception e)
                 {
 
-                }
-                else if (Global.mainMenuOption == 4)
-                {
-
-                }
-                else if (Global.mainMenuOption == 5)
-                {
-
-                }
-                else if (Global.mainMenuOption == 6)
-                {
+                    Console.WriteLine("You have inputed a wrong option.");
 
                 }
 
 
-            } while (Global.mainMenuOption > 6);
+
+                switch (Global.MainMenuOption)
+                {
+                    case 1:
+
+                        //Calling the obect of the recipe class so it can perform the functions of the class.
+                        Recipe.ingredients();
+                        break;
+
+                    case 2:
+
+                        if (Recipe.NumOfIngri != 0)
+                        {
+                            Recipe.DisplayMenu();
+                        }
+                        else
+                        {
+                            Console.WriteLine("You need to input a recipe");
+                            Menu();
+                        }
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        Environment.Exit(0);
+                        break;
+                }
+
+
+
+            } while (Global.MainMenuOption != 6);
 
             Console.ReadKey();
         }
     }
-    
+
 }

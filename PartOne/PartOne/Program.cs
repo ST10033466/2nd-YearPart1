@@ -38,14 +38,17 @@ namespace PartOne
             //A do while loop create so the program can run untill the user exits the program
             do
             {
+                Console.WriteLine("*********************************");
+                Console.WriteLine("             Menu \n");
                 //A  main menu for the console app, promting the user to input an option.
-                Console.WriteLine("Select an option\n" +
-                    "1. Enter a recipe\n" +
-                    "2. Display the full recipe\n" +
-                    "3. Change the quantity scaled\n" +
-                    "4. Reset the quantity scaled\n" +
-                    "5. Clear all data\n" +
-                    "6. Exit program");
+                Console.Write("1. Enter a recipe\n" +
+                    "2. Display the full recipe \n" +
+                    "3. Change the quantity scaled \n" +
+                    "4. Reset the quantity scaled \n" +
+                    "5. Clear all data \n" +
+                    "6. Exit program \n\n" +
+                    "Select an option: ");
+
 
 
                 try
@@ -60,7 +63,7 @@ namespace PartOne
 
                 }
 
-
+                Console.WriteLine("*********************************");
 
                 switch (Global.MainMenuOption)
                 {
@@ -72,15 +75,17 @@ namespace PartOne
 
                     case 2:
 
-                        if (myRecipe.NumOfIngri != 0)
-                        {
-                            Recipe.DisplayMenu(myRecipe);
-                        }
-                        else
-                        {
-                            Console.WriteLine("You need to input a recipe");
-                            Menu();
-                        }
+                        Recipe.DisplayMenu();
+
+                        //if (myRecipe.NumOfIngri > 0)
+                        //{
+                        //    Recipe.DisplayMenu(myRecipe);
+                        //}
+                        //else
+                        //{
+                        //    Console.WriteLine("You need to input a recipe");
+                        //    Menu();
+                        //}
                         break;
                     case 3:
                         break;

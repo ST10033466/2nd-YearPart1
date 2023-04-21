@@ -9,83 +9,114 @@ namespace PartOne
     internal class Recipe
     {
 
-        public int[] Quantity { get; set; }
 
-        public string[] Name { get; set; } 
-
-        public string[] Unit { get; set; }
-
-
-        public string[] Description { get; set; }
+        private static int numOfIngri, numOfSteps;
+        private static int[] ingridentQuantity;
+        private static string[] ingredientName;
+        private static string[] unitOfMeasurement;
+        private static string[] descriptionOfSteps;
 
 
-        public int NumOfIngri { get; set; }
+        public int[] Quantity 
+        { get {return ingridentQuantity; }
+            set {ingridentQuantity = value; } 
+        }
+
+        public string[] Name
+        {
+            get { return ingredientName; }
+            set { ingredientName = value; }
+        }
+
+        public string[] Unit
+        {
+            get { return unitOfMeasurement; }
+            set { unitOfMeasurement = value; }
+        }
 
 
-        public int NumOfSteps { get; set; }
+        public string[] Description
+        {
+            get { return descriptionOfSteps; }
+            set { descriptionOfSteps = value; }
+        }
+
+
+        public int NumOfIngri
+        {
+            get { return numOfIngri; }
+            set { numOfIngri = value; }
+        }
+
+
+        public int NumOfSteps
+        {
+            get { return numOfSteps; }
+            set { numOfSteps = value; }
+        }
 
 
 
-        
+
 
         public static void ingredients()
         {
-            Recipe theRecipe = new Recipe();
 
-            Console.WriteLine("How many Ingridents would you like to add?");
+            
+            Console.Write("\nHow many Ingridents would you like to add: ");
 
             try
             {
-                theRecipe.NumOfIngri = Convert.ToInt32(Console.ReadLine());
+                numOfIngri = Convert.ToInt32(Console.ReadLine());
             }
             catch (Exception e)
             {
                 Console.Write("Wrong input, Please input a number:  ");
 
-                theRecipe.NumOfIngri = Convert.ToInt32(Console.ReadLine());
-                
-                
+                numOfIngri = Convert.ToInt32(Console.ReadLine());
+
+
             }
 
 
 
 
-            theRecipe.Quantity = new int[theRecipe.NumOfIngri];
-            theRecipe.Name = new string[theRecipe.NumOfIngri];
-            theRecipe.Unit = new string[theRecipe.NumOfIngri];
+            ingridentQuantity = new int[numOfIngri];
+            ingredientName = new string[numOfIngri];
+            unitOfMeasurement = new string[numOfIngri];
 
 
-            for (int i = 0; theRecipe.NumOfIngri > i; i++)
+            for (int i = 0; numOfIngri > i; i++)
             {
 
-                Console.WriteLine("What is the name of ingridents " + (i + 1) + " ?");
-                theRecipe.Name[i] = Console.ReadLine();
+                Console.Write("What is the name of ingridents " + (i + 1) + ": ");
+                ingredientName[i] = Console.ReadLine();
 
 
 
-                Console.WriteLine("What is the qunatity of ingridents " + (i + 1) + " ?");
-                theRecipe.Quantity[i] = Convert.ToInt32(Console.ReadLine());
+                Console.Write("What is the qunatity of ingridents " + (i + 1) + ": ");
+                ingridentQuantity[i] = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine("What is the unit of measurement of ingridents " + (i + 1) + " ?");
-                theRecipe.Unit[i] = Console.ReadLine();
+                Console.Write("What is the unit of measurement of ingridents " + (i + 1) + ": ");
+                unitOfMeasurement[i] = Console.ReadLine();
 
 
 
             }
 
-            Console.WriteLine("How many steps are there? ");
-            theRecipe.NumOfSteps = Convert.ToInt32(Console.ReadLine());
+            Console.Write("How many steps are there: ");
+            numOfSteps = Convert.ToInt32(Console.ReadLine());
 
-            theRecipe.Description = new string[theRecipe.NumOfSteps];
+            descriptionOfSteps = new string[numOfSteps];
 
-            for (int i = 0; theRecipe.NumOfSteps > i; i++)
+            for (int i = 0; numOfSteps > i; i++)
             {
-                Console.WriteLine("Step " + (i + 1));
-                theRecipe.Description[i] = Console.ReadLine();
+                Console.Write("Step " + (i + 1) + ": ");
+                descriptionOfSteps[i] = Console.ReadLine();
 
             }
 
-            Console.WriteLine("You have entered the details successfully\n");
+            Console.WriteLine("\nYou have entered the details successfully\n");
 
             Program.Menu();
 
@@ -93,33 +124,29 @@ namespace PartOne
 
         }
 
-        public static void DisplayMenu(Recipe theRecipe)
+        public static void DisplayMenu()
         {
+
+            Console.WriteLine("*********************************");
+            Console.WriteLine("        Recipe Dispaly \n");    
+            Console.WriteLine("Ingredients:");
+            Console.WriteLine("*********************************");
+            Console.WriteLine("Number of Ingredients: " + numOfIngri + "\n");
+            for (int j = 0; numOfIngri > j; j++)
+            {
+
+                Console.WriteLine("Name of Ingredient: " + ingredientName[j]);
+                Console.WriteLine("Quantity of Ingredient: " + ingridentQuantity[j]);
+                Console.WriteLine("Unit of Measurement: " + unitOfMeasurement[j] + "\n");
+            }
+
             
-
-            Console.WriteLine("Recipe: ");
-            Console.WriteLine("*************************\n");
-
-            Console.WriteLine("Ingredients");
-            Console.WriteLine("************************");
-            Console.WriteLine("Number of Ingredients: " + theRecipe.NumOfIngri);
-            for (int j = 0; theRecipe.NumOfIngri > j; j++)
+            Console.WriteLine("             Steps \n");
+            for (int k = 0; numOfSteps > k; k++)
             {
-
-                Console.WriteLine("Name of Ingredient: " + theRecipe.Name[j]);
-                Console.WriteLine("Quantity of Ingredient: " + theRecipe.Quantity[j]);
-                Console.WriteLine("Unit of Measurement: " + theRecipe.Unit[j]);
+                Console.WriteLine("Step " + (k + 1) + ": " + descriptionOfSteps[k]);
             }
-
-            Console.WriteLine("************************************");
-            Console.WriteLine("Step: " + theRecipe.NumOfSteps);
-            for (int k = 0; theRecipe.NumOfSteps > k; k++)
-            {
-                Console.WriteLine("Step " + (k + 1) + ": " + theRecipe.Description[k]);
-            }
-
-
-            Console.ReadKey();
+            Console.WriteLine("*********************************");
 
 
 

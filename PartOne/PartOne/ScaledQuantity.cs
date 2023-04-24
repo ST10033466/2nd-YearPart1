@@ -8,14 +8,31 @@ namespace PartOne
 {
     internal class ScaledQuantity
     {
+        public static Ingredients myIngri = new Ingredients();
+
+        private static int[] newQuantity = new int[myIngri.NumOfIngri];
+
+        public int[] NewQuantity
+        {
+            get { return newQuantity; }
+            set { newQuantity = value; }
+        }
+
+        
+
         public static void changingScaledQuantity()
         {
-            Ingredients myIngri = new Ingredients();
+            
 
             double halfScaled = 0.5;
             int doubleScaled = 2;
             int trippleScaled = 3;
             int optionOfScale = 0;
+
+            newQuantity = myIngri.Quantity;
+            //int[] newQuantity = new int[myIngri.NumOfIngri];
+
+
 
             while (optionOfScale < 3) 
             {
@@ -37,15 +54,17 @@ namespace PartOne
                     Console.Write("You made an incorrect input, Please try again: ");
                 }
 
+                int[] scaledQuantity = new int[myIngri.NumOfIngri];
+
                 switch (optionOfScale)
                 {
                     case 1:
 
                         for(int i = 0; i < myIngri.NumOfIngri ; i++)
                         {
-                            myIngri.Quantity[i] *= (int)halfScaled;
+                            newQuantity[i] *= (int)halfScaled;
 
-                            Console.WriteLine("Quantity: " + myIngri.Quantity);
+                            Console.WriteLine("Quantity: " + myIngri.Quantity[i]);
 
                         }
 
@@ -62,7 +81,7 @@ namespace PartOne
                     case 2:
                         for (int i = 0; i < myIngri.NumOfIngri ; i++)
                         {
-                            myIngri.Quantity[i] *= doubleScaled;
+                            newQuantity[i] *= doubleScaled;
 
                             Console.WriteLine("Quantity: " + myIngri.Quantity[i]);
 
@@ -73,7 +92,7 @@ namespace PartOne
                     case 3:
                         for (int i = 0; i < myIngri.NumOfIngri; i++)
                         {
-                            myIngri.Quantity[i] *= trippleScaled;
+                            newQuantity[i] *= trippleScaled;
 
                             Console.WriteLine("Quantity: " + myIngri.Quantity[i]);
 
@@ -104,7 +123,23 @@ namespace PartOne
 
         public static void resettingScaledQuantity() 
         {
+            for (int j = 0; j < myIngri.NumOfIngri; j++) 
+            {
 
+
+
+                if (myIngri.Quantity[j] > newQuantity[j])
+                {
+                    Console.WriteLine(" Old Quantity: " + myIngri.Quantity[j]);
+                    Console.WriteLine(" New Quantity: " + newQuantity[j]);
+                    newQuantity[j] = myIngri.Quantity[j];
+                }
+                else
+                {
+                    Console.WriteLine(" The Quantity: " + newQuantity[j]);
+                }
+            }
+                
 
         }
     }

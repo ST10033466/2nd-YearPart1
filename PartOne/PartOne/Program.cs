@@ -24,16 +24,16 @@ namespace PartOne
             //A welcome message, welcoming users
             Console.WriteLine("Welcome to Recipe World\n");
 
-            Menu();
+            MainMenu();
 
 
 
 
         }
-        public static void Menu()
+        public static void MainMenu()
         {
 
-            Recipe myRecipe = new Recipe();
+            Ingredients myRecipe = new Ingredients();
 
             //A do while loop create so the program can run untill the user exits the program
             do
@@ -70,28 +70,36 @@ namespace PartOne
                     case 1:
 
                         //Calling the obect of the recipe class so it can perform the functions of the class.
-                        Recipe.ingredients();
+                        Ingredients.InputtingIngredients();
                         break;
 
                     case 2:
 
-                        Recipe.DisplayMenu();
+                        //Ingredients.DisplayingMenu();
 
-                        //if (myRecipe.NumOfIngri > 0)
-                        //{
-                        //    Recipe.DisplayMenu(myRecipe);
-                        //}
-                        //else
-                        //{
-                        //    Console.WriteLine("You need to input a recipe");
-                        //    Menu();
-                        //}
+                        if (myRecipe.NumOfIngri > 0)
+                        {
+                            Ingredients.DisplayingMenu();
+                        }
+                        else
+                        {
+                            Console.WriteLine("You need to input a recipe");
+                            MainMenu();
+                        }
+
                         break;
                     case 3:
+
+                        ScaledQuantity.changingScaledQuantity();
                         break;
                     case 4:
+
+                        ScaledQuantity.resettingScaledQuantity();
                         break;
                     case 5:
+
+                        Ingredients.ClearingData();
+                        Ingredients.InputtingIngredients();
                         break;
                     case 6:
                         Environment.Exit(0);

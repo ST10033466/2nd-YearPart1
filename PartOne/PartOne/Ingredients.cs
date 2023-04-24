@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PartOne
 {
-    internal class Recipe
+    internal class Ingredients
     {
 
 
@@ -59,7 +59,7 @@ namespace PartOne
 
 
 
-        public static void ingredients()
+        public static void InputtingIngredients()
         {
 
             
@@ -95,7 +95,22 @@ namespace PartOne
 
 
                 Console.Write("What is the qunatity of ingridents " + (i + 1) + ": ");
-                ingridentQuantity[i] = Convert.ToInt32(Console.ReadLine());
+
+
+                try
+                {
+                    ingridentQuantity[i] = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.Write("Wrong input, Please input a number:  ");
+
+                    ingridentQuantity[i] = Convert.ToInt32(Console.ReadLine());
+
+
+                }
+
+                
 
                 Console.Write("What is the unit of measurement of ingridents " + (i + 1) + ": ");
                 unitOfMeasurement[i] = Console.ReadLine();
@@ -105,7 +120,21 @@ namespace PartOne
             }
 
             Console.Write("How many steps are there: ");
-            numOfSteps = Convert.ToInt32(Console.ReadLine());
+
+            try
+            {
+                numOfSteps = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.Write("Wrong input, Please input a number:  ");
+
+                numOfSteps = Convert.ToInt32(Console.ReadLine());
+
+
+            }
+
+            
 
             descriptionOfSteps = new string[numOfSteps];
 
@@ -118,25 +147,28 @@ namespace PartOne
 
             Console.WriteLine("\nYou have entered the details successfully\n");
 
-            Program.Menu();
+            Program.MainMenu();
 
             Console.ReadKey();
 
         }
 
-        public static void DisplayMenu()
+        public static void DisplayingMenu()
         {
+
+            ScaledQuantity myobj = new ScaledQuantity();
 
             Console.WriteLine("*********************************");
             Console.WriteLine("        Recipe Dispaly \n");    
             Console.WriteLine("Ingredients:");
             Console.WriteLine("*********************************");
             Console.WriteLine("Number of Ingredients: " + numOfIngri + "\n");
-            for (int j = 0; numOfIngri > j; j++)
+            for (int j = 0; ingredientName.Length > j ; j++)
             {
 
                 Console.WriteLine("Name of Ingredient: " + ingredientName[j]);
                 Console.WriteLine("Quantity of Ingredient: " + ingridentQuantity[j]);
+                //Console.WriteLine("Quantity of Ingredient: " + myobj.NewQuantity[j]);
                 Console.WriteLine("Unit of Measurement: " + unitOfMeasurement[j] + "\n");
             }
 
@@ -150,6 +182,19 @@ namespace PartOne
 
 
 
+        }
+
+        public static void ClearingData() 
+        {
+
+        numOfIngri = 0; 
+        numOfSteps = 0;
+        ingridentQuantity = null;
+        ingredientName = null; 
+        unitOfMeasurement = null; 
+        descriptionOfSteps = null;
+
+            Console.WriteLine("You have cleared!");
         }
     }
 }

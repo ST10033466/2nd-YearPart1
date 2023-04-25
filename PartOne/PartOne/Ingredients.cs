@@ -168,7 +168,8 @@ namespace PartOne
 
                 Console.WriteLine("Name of Ingredient: " + ingredientName[j]);
                 Console.WriteLine("Quantity of Ingredient: " + ingridentQuantity[j]);
-                //Console.WriteLine("Quantity of Ingredient: " + myobj.NewQuantity[j]);
+               
+                //ScaledQuantity.resettingScaledQuantity();
                 Console.WriteLine("Unit of Measurement: " + unitOfMeasurement[j] + "\n");
             }
 
@@ -186,15 +187,57 @@ namespace PartOne
 
         public static void ClearingData() 
         {
+            //This is the variable that stores the option for clearing data or not.
+            int confirmationOFClearing = 0;
 
-        numOfIngri = 0; 
-        numOfSteps = 0;
-        ingridentQuantity = null;
-        ingredientName = null; 
-        unitOfMeasurement = null; 
-        descriptionOfSteps = null;
+            Console.Write("Would you like to clear the data: " +
+                "1. Yes \n" +
+                "2. No \n" +
+                "3. Go back to menu \n" +
+                "Enter your option: ");
 
-            Console.WriteLine("You have cleared!");
+            //Try and catch used so that the program can pick up if the user made an incorrect input
+            //and re-prompt them.
+            try 
+            {
+                //Stroing user input for the 
+                confirmationOFClearing = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e) 
+            {
+                Console.Write("Incorrect Input, Type in a number: ");
+            }
+
+
+            switch(confirmationOFClearing)
+            {
+                case 1:
+
+                    numOfIngri = 0;
+                    numOfSteps = 0;
+                    ingridentQuantity = null;
+                    ingredientName = null;
+                    unitOfMeasurement = null;
+                    descriptionOfSteps = null;
+
+                    Console.WriteLine("You have cleared!");
+
+                    break;
+                case 2:
+
+                    Console.WriteLine("You have decided to not clear the data");
+
+                    break;
+                case 3:
+
+                    Ingredients.DisplayingMenu();
+
+                    break;
+
+            }
+
+
+        
         }
     }
 }

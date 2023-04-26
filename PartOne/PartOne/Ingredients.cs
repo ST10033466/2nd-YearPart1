@@ -62,20 +62,22 @@ namespace PartOne
         public static void InputtingIngredients()
         {
 
-            
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("\nHow many Ingridents would you like to add: ");
 
-            try
+            
+            while (true)
             {
-                numOfIngri = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (Exception e)
-            {
-                Console.Write("Wrong input, Please input a number:  ");
-
-                numOfIngri = Convert.ToInt32(Console.ReadLine());
-
-
+                try
+                {
+                    numOfIngri = Convert.ToInt32(Console.ReadLine());
+                    break;  // exit the loop if the input is valid
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("Wrong input, Please input a number:  ");
+                }
             }
 
 
@@ -88,7 +90,7 @@ namespace PartOne
 
             for (int i = 0; numOfIngri > i; i++)
             {
-
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("What is the name of ingridents " + (i + 1) + ": ");
                 ingredientName[i] = Console.ReadLine();
 
@@ -96,22 +98,22 @@ namespace PartOne
 
                 Console.Write("What is the qunatity of ingridents " + (i + 1) + ": ");
 
-
-                try
+                while (true)
                 {
-                    ingridentQuantity[i] = Convert.ToInt32(Console.ReadLine());
+                    try
+                    {
+                        ingridentQuantity[i] = Convert.ToInt32(Console.ReadLine());
+                        break; // exit the loop if the input is valid
+                    }
+                    catch (Exception e)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("Wrong input, Please input a number:  ");
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.Write("Wrong input, Please input a number:  ");
-
-                    ingridentQuantity[i] = Convert.ToInt32(Console.ReadLine());
 
 
-                }
-
-                
-
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("What is the unit of measurement of ingridents " + (i + 1) + ": ");
                 unitOfMeasurement[i] = Console.ReadLine();
 
@@ -121,31 +123,34 @@ namespace PartOne
 
             Console.Write("How many steps are there: ");
 
-            try
+            while (true)
             {
-                numOfSteps = Convert.ToInt32(Console.ReadLine());
+                try
+                {
+                    numOfSteps = Convert.ToInt32(Console.ReadLine());
+                    break; // exit the loop if input is valid
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("Wrong input, Please input a number:  ");
+                }
             }
-            catch (Exception e)
-            {
-                Console.Write("Wrong input, Please input a number:  ");
-
-                numOfSteps = Convert.ToInt32(Console.ReadLine());
 
 
-            }
-
-            
 
             descriptionOfSteps = new string[numOfSteps];
 
             for (int i = 0; numOfSteps > i; i++)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Step " + (i + 1) + ": ");
                 descriptionOfSteps[i] = Console.ReadLine();
 
             }
 
-            Console.WriteLine("\nYou have entered the details successfully\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nYou have entered the details successfully");
 
             // Calls the MainMenu method in the Program class to go back to the main menu.
             Program.MainMenu();
@@ -157,6 +162,7 @@ namespace PartOne
         // This method displays the ingredients and steps entered by the user.
         public static void DisplayingMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             // creating an object of the ScaledQuantity class
             ScaledQuantity myobj = new ScaledQuantity();
 
@@ -189,26 +195,42 @@ namespace PartOne
         // This method clears the data from the recipe
         public static void ClearingData() 
         {
+            Console.ForegroundColor = ConsoleColor.White;
             // variable that stores the user's confirmation to clear the data
             int confirmationOFClearing = 0;
 
             // prompting user to confirm if they want to clear the data or not
-            Console.Write("Would you like to clear the data: " +
-                "1. Yes \n" +
-                "2. No \n" +
-                "3. Go back to menu \n" +
-                "Enter your option: ");
+            do
+            {
+                Console.Write("Would you like to clear the data: \n" +
+                    "1. Yes \n" +
+                    "2. No \n" +
+                    "Enter your option: ");
 
-            // using try-catch to handle incorrect user input
-            try
-            {
-                // storing user input for confirmation
-                confirmationOFClearing = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (Exception e) 
-            {
-                Console.Write("Incorrect Input, Type in a number: ");
-            }
+                // using try-catch to handle incorrect user input
+                try
+                {
+                    // storing user input for confirmation
+                    confirmationOFClearing = Convert.ToInt32(Console.ReadLine());
+
+                    // check if input is within valid range
+                    if (confirmationOFClearing < 1 || confirmationOFClearing > 2)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid input. Please enter 1 or 2.");
+                        confirmationOFClearing = 0; // reset confirmation
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Incorrect Input, Type in a number.");
+                    confirmationOFClearing = 0; // reset confirmation
+                }
+            } while (confirmationOFClearing == 0);
+
+
+
 
             // using a switch statement to handle the user's choice
             switch (confirmationOFClearing)
@@ -224,23 +246,24 @@ namespace PartOne
                     unitOfMeasurement = null;
                     descriptionOfSteps = null;
 
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You have cleared!");
+
+                    //Calling InputtingIngredients method to prompt user to input data after clearing
+                    Ingredients.InputtingIngredients();
 
                     break;
 
                 // if the user chooses not to clear the data, a message is printed indicating their choice
+                //The option will take the user back to the Menu
                 case 2:
 
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You have decided to not clear the data");
+                    Program.MainMenu();
 
                     break;
 
-                // if the user chooses to go back to the menu, the DisplayingMenu() method is called
-                case 3:
-
-                    Ingredients.DisplayingMenu();
-
-                    break;
 
             }
 

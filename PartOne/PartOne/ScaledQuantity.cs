@@ -13,7 +13,13 @@ namespace PartOne
         public static Ingredients myIngri = new Ingredients();
 
         // Declare an integer variable to store the option of scale
-        public static int optionOfScale = 0;
+        private static int optionOfScale = 0;
+
+        public int OptionScale
+        {
+            get { return optionOfScale; }
+            set { optionOfScale = value; }
+        }
 
         public static double halfScale = 0.5;
         public static double doubleScale = 2;
@@ -29,21 +35,29 @@ namespace PartOne
             // Use a while loop to display the options and prompt for input until optionOfScale is greater than or equal to 3
             while (optionOfScale < 3) 
             {
-                Console.Write("What scale would you like to change the quantity to: \n" +
-                "1. Half \n" +
-                "2. Double \n" +
-                "3. Tripple \n" +
-                "Input option: ");
+                do
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\nWhat scale would you like to change the quantity to: \n" +
+                        "1. Half \n" +
+                        "2. Double \n" +
+                        "3. Tripple \n" +
+                        "Input option: ");
 
-                // Use a try-catch block to catch any exceptions from user input
-                try
-                {
-                    optionOfScale = Convert.ToInt32(Console.ReadLine());  
-                }
-                catch (Exception e)
-                {
-                    Console.Write("You made an incorrect input, Please try again: ");
-                }
+                    try
+                    {
+                        optionOfScale = Convert.ToInt32(Console.ReadLine());
+                    }
+                    catch (Exception e)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("You made an incorrect input, Please try again");
+                        optionOfScale = 0; // set to 0 to keep the loop running
+                    }
+
+                } while (optionOfScale < 1 || optionOfScale > 3); // keep looping until user input is correct
+
+
 
                 // Use a switch statement to perform different actions based on the user's input
                 switch (optionOfScale)
@@ -52,12 +66,14 @@ namespace PartOne
                         // Use a for loop to iterate through the ingredients and update their quantities to half
                         for (int i = 0; i < myIngri.NumOfIngri ; i++)
                         {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             myIngri.Quantity[i] = (int)(myIngri.Quantity[i] * halfScale);
 
-                            Console.WriteLine("Quantity: " + myIngri.Quantity[i]);
+                            Console.WriteLine("Quantity " + (i + 1) + ": " + myIngri.Quantity[i]);
 
                         }
 
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("You have successfully changed the qunatity to half.");
 
                         break;
@@ -66,12 +82,14 @@ namespace PartOne
                         // Use a for loop to iterate through the ingredients and update their quantities to double
                         for (int i = 0; i < myIngri.NumOfIngri ; i++)
                         {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             myIngri.Quantity[i] = (int)(myIngri.Quantity[i] * doubleScale);
 
-                            Console.WriteLine("Quantity: " + myIngri.Quantity[i]);
+                            Console.WriteLine("Quantity " + (i + 1) + ": " + myIngri.Quantity[i]);
 
                         }
 
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("You have successfully changed the qunatity to double.");
                         break;
                     case 3:
@@ -79,12 +97,14 @@ namespace PartOne
                         // Use a for loop to iterate through the ingredients and update their quantities to triple
                         for (int i = 0; i < myIngri.NumOfIngri; i++)
                         {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             myIngri.Quantity[i] = (int)(myIngri.Quantity[i] * trippleScale);
 
-                            Console.WriteLine("Quantity: " + myIngri.Quantity[i]);
+                            Console.WriteLine("Quantity " + (i + 1) +": "+ myIngri.Quantity[i]);
 
                         }
 
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("You have successfully changed the qunatity to tripple.");
                         break;
                     
@@ -101,6 +121,8 @@ namespace PartOne
         public static void resettingScaledQuantity() 
       
   {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
             // Use a for loop to iterate through the ingredients and update their quantities to half
             for (int j = 0; j < myIngri.NumOfIngri; j++) 
             {
@@ -113,8 +135,9 @@ namespace PartOne
                         {
                             myIngri.Quantity[j] = (int)(myIngri.Quantity[j] / halfScale);
 
-                            Console.WriteLine("Quantity: " + myIngri.Quantity[i] + "\n" +
-                                "You have succesfully reset the quantity!");
+                            Console.WriteLine("Quantity: " + myIngri.Quantity[i] );
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("You have succesfully reset the quantity!");
 
                         }
 
@@ -126,8 +149,9 @@ namespace PartOne
                         {
                             myIngri.Quantity[j] = (int)(myIngri.Quantity[j] / doubleScale);
 
-                            Console.WriteLine("Quantity: " + myIngri.Quantity[i] + "\n" +
-                                "You have succesfully reset the quantity!");
+                            Console.WriteLine("Quantity: " + myIngri.Quantity[i]);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("You have succesfully reset the quantity!");
 
                         }
 
@@ -139,8 +163,9 @@ namespace PartOne
                         {
                             myIngri.Quantity[j] = (int)(myIngri.Quantity[j] / trippleScale);
 
-                            Console.WriteLine("Quantity: " + myIngri.Quantity[i]+ "\n" +
-                                "You have succesfully reset the quantity!");
+                            Console.WriteLine("Quantity: " + myIngri.Quantity[i]);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("You have succesfully reset the quantity!");
 
                         }
 

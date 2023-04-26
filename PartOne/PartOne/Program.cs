@@ -7,118 +7,246 @@ using System.Threading.Tasks;
 
 namespace PartOne
 {
-    class Global
+    internal class Ingredients
     {
-        public static string Fullrecipe, DisplayingRecipe, ScaledIngredientQuantities, QuantitiesReset, ClearData, ExitProgram;
 
-        public static int MainMenuOption = 0;
-    }
+        // These static variables will store the data entered by the user.
+        private static int numOfIngri, numOfSteps;
+        private static int[] ingridentQuantity;
+        private static string[] ingredientName;
+        private static string[] unitOfMeasurement;
+        private static string[] descriptionOfSteps;
 
-
-
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-
-            //A welcome message, welcoming users
-            Console.WriteLine("Welcome to Recipe World\n");
-
-            MainMenu();
-
-
-
-
+        // These properties allow external code to access and modify the static variables.
+        public int[] Quantity 
+        { get {return ingridentQuantity; }
+            set {ingridentQuantity = value; } 
         }
-        public static void MainMenu()
+
+        public string[] Name
+        {
+            get { return ingredientName; }
+            set { ingredientName = value; }
+        }
+
+        public string[] Unit
+        {
+            get { return unitOfMeasurement; }
+            set { unitOfMeasurement = value; }
+        }
+
+
+        public string[] Description
+        {
+            get { return descriptionOfSteps; }
+            set { descriptionOfSteps = value; }
+        }
+
+
+        public int NumOfIngri
+        {
+            get { return numOfIngri; }
+            set { numOfIngri = value; }
+        }
+
+
+        public int NumOfSteps
+        {
+            get { return numOfSteps; }
+            set { numOfSteps = value; }
+        }
+
+
+
+
+        // This method prompts the user to input the ingredient details and stores them in the static variables.
+        public static void InputtingIngredients()
         {
 
-            Ingredients myRecipe = new Ingredients();
+            
+            Console.Write("\nHow many Ingridents would you like to add: ");
 
-            //A do while loop create so the program can run untill the user exits the program
-            do
+            try
             {
-                Console.WriteLine("*********************************");
-                Console.WriteLine("             Menu \n");
-                //A  main menu for the console app, promting the user to input an option.
-                Console.Write("1. Enter a recipe\n" +
-                    "2. Display the full recipe \n" +
-                    "3. Change the quantity scaled \n" +
-                    "4. Reset the quantity scaled \n" +
-                    "5. Clear all data \n" +
-                    "6. Exit program \n\n" +
-                    "Select an option: ");
+                numOfIngri = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.Write("Wrong input, Please input a number:  ");
 
+                numOfIngri = Convert.ToInt32(Console.ReadLine());
+
+
+            }
+
+
+
+
+            ingridentQuantity = new int[numOfIngri];
+            ingredientName = new string[numOfIngri];
+            unitOfMeasurement = new string[numOfIngri];
+
+
+            for (int i = 0; numOfIngri > i; i++)
+            {
+
+                Console.Write("What is the name of ingridents " + (i + 1) + ": ");
+                ingredientName[i] = Console.ReadLine();
+
+
+
+                Console.Write("What is the qunatity of ingridents " + (i + 1) + ": ");
 
 
                 try
                 {
-                    Global.MainMenuOption = Convert.ToInt32(Console.ReadLine());
+                    ingridentQuantity[i] = Convert.ToInt32(Console.ReadLine());
                 }
-
                 catch (Exception e)
                 {
+                    Console.Write("Wrong input, Please input a number:  ");
 
-                    Console.WriteLine("You have to input a number.");
+                    ingridentQuantity[i] = Convert.ToInt32(Console.ReadLine());
+
 
                 }
 
-                Console.WriteLine("*********************************");
+                
 
-                switch (Global.MainMenuOption)
-                {
-                    case 1:
-
-                        //Calling the obect of the recipe class so it can perform the functions of the class.
-                        Ingredients.InputtingIngredients();
-                        break;
-
-                    case 2:
-
-                        //Ingredients.DisplayingMenu();
-
-                        if (myRecipe.NumOfIngri > 0)
-                        {
-                            Ingredients.DisplayingMenu();
-                        }
-                        else
-                        {
-                            Console.WriteLine("You need to input a recipe");
-                            MainMenu();
-                        }
-
-                        break;
-                    case 3:
-
-                        ScaledQuantity.changingScaledQuantity();
-                        break;
-                    case 4:
-
-                        ScaledQuantity.resettingScaledQuantity();
-                        break;
-                    case 5:
-
-                        Ingredients.ClearingData();
-                        Ingredients.InputtingIngredients();
-                        break;
-                    case 6:
-                        Environment.Exit(0);
-                        break;
-                    default:
-                        if(Global.MainMenuOption > 6) 
-                        {
-                            Console.WriteLine("You have inputted a number greater than 6 , try again! \n");
-                        }
-                         
-                        break;
-                }
+                Console.Write("What is the unit of measurement of ingridents " + (i + 1) + ": ");
+                unitOfMeasurement[i] = Console.ReadLine();
 
 
 
-            } while (Global.MainMenuOption != 6);
+            }
+
+            Console.Write("How many steps are there: ");
+
+            try
+            {
+                numOfSteps = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.Write("Wrong input, Please input a number:  ");
+
+                numOfSteps = Convert.ToInt32(Console.ReadLine());
+
+
+            }
+
+            
+
+            descriptionOfSteps = new string[numOfSteps];
+
+            for (int i = 0; numOfSteps > i; i++)
+            {
+                Console.Write("Step " + (i + 1) + ": ");
+                descriptionOfSteps[i] = Console.ReadLine();
+
+            }
+
+            Console.WriteLine("\nYou have entered the details successfully\n");
+
+            // Calls the MainMenu method in the Program class to go back to the main menu.
+            Program.MainMenu();
 
             Console.ReadKey();
+
+        }
+
+        // This method displays the ingredients and steps entered by the user.
+        public static void DisplayingMenu()
+        {
+            // creating an object of the ScaledQuantity class
+            ScaledQuantity myobj = new ScaledQuantity();
+
+            // printing the header and ingredients section of the recipe
+            Console.WriteLine("*********************************");
+            Console.WriteLine("        Recipe Dispaly \n");    
+            Console.WriteLine("Ingredients:");
+            Console.WriteLine("*********************************");
+            Console.WriteLine("Number of Ingredients: " + numOfIngri + "\n");
+            for (int j = 0; ingredientName.Length > j ; j++)
+            {
+
+                Console.WriteLine("Name of Ingredient: " + ingredientName[j]);
+                Console.WriteLine("Quantity of Ingredient: " + ingridentQuantity[j]);
+                Console.WriteLine("Unit of Measurement: " + unitOfMeasurement[j] + "\n");
+            }
+
+            // printing the steps section of the recipe
+            Console.WriteLine("             Steps \n");
+            for (int k = 0; numOfSteps > k; k++)
+            {
+                Console.WriteLine("Step " + (k + 1) + ": " + descriptionOfSteps[k]);
+            }
+            Console.WriteLine("*********************************");
+
+
+
+        }
+
+        // This method clears the data from the recipe
+        public static void ClearingData() 
+        {
+            // variable that stores the user's confirmation to clear the data
+            int confirmationOFClearing = 0;
+
+            // prompting user to confirm if they want to clear the data or not
+            Console.Write("Would you like to clear the data: " +
+                "1. Yes \n" +
+                "2. No \n" +
+                "3. Go back to menu \n" +
+                "Enter your option: ");
+
+            // using try-catch to handle incorrect user input
+            try
+            {
+                // storing user input for confirmation
+                confirmationOFClearing = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e) 
+            {
+                Console.Write("Incorrect Input, Type in a number: ");
+            }
+
+            // using a switch statement to handle the user's choice
+            switch (confirmationOFClearing)
+            {
+
+                // if the user chooses to clear the data, all the recipe data is reset to null or 0
+                case 1:
+
+                    numOfIngri = 0;
+                    numOfSteps = 0;
+                    ingridentQuantity = null;
+                    ingredientName = null;
+                    unitOfMeasurement = null;
+                    descriptionOfSteps = null;
+
+                    Console.WriteLine("You have cleared!");
+
+                    break;
+
+                // if the user chooses not to clear the data, a message is printed indicating their choice
+                case 2:
+
+                    Console.WriteLine("You have decided to not clear the data");
+
+                    break;
+
+                // if the user chooses to go back to the menu, the DisplayingMenu() method is called
+                case 3:
+
+                    Ingredients.DisplayingMenu();
+
+                    break;
+
+            }
+
+
+        
         }
     }
-
 }

@@ -39,6 +39,7 @@ namespace PartOne
             // A do-while loop to keep running the program until the user chooses to exit
             do
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("*********************************");
                 Console.WriteLine("             Menu \n");
 
@@ -51,6 +52,8 @@ namespace PartOne
                     "6. Exit program \n\n" +
                     "Select an option: ");
 
+                
+
                 try
                 {
                     // Try to convert the user's input to an integer and store it in MainMenuOption
@@ -58,6 +61,7 @@ namespace PartOne
                 }
                 catch (Exception e)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     // If the user input cannot be converted to an integer, display an error message
                     Console.WriteLine("You have to input a number.");
                 }
@@ -67,6 +71,7 @@ namespace PartOne
                 switch (Global.MainMenuOption)
                 {
                     case 1:
+
                         // Call the InputtingIngredients function of the Ingredients class to let the user input a recipe
                         Ingredients.InputtingIngredients();
                         break;
@@ -79,6 +84,7 @@ namespace PartOne
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             // If there is no recipe, display an error message and return to the main menu
                             Console.WriteLine("You need to input a recipe");
                             MainMenu();
@@ -86,17 +92,57 @@ namespace PartOne
 
                         break;
                     case 3:
-                        // Call the changingScaledQuantity function of the ScaledQuantity class to let the user change the scaled quantity of an ingredient
-                        ScaledQuantity.changingScaledQuantity();
+
+                        if (myRecipe.NumOfIngri > 0)
+                        {
+                            // Call the changingScaledQuantity function of the ScaledQuantity class to let the user change the scaled quantity of an ingredient
+                            ScaledQuantity.changingScaledQuantity();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            // If there is no recipe, display an error message and return to the main menu
+                            Console.WriteLine("You need to input a recipe");
+                            MainMenu();
+                        }
+
                         break;
                     case 4:
-                        // Call the resettingScaledQuantity function of the ScaledQuantity class to reset the scaled quantity of all ingredients
-                        ScaledQuantity.resettingScaledQuantity();
+
+                        ScaledQuantity myScaleObj = new ScaledQuantity();
+
+                        if (myRecipe.NumOfIngri > 0 && myScaleObj.OptionScale > 0)
+                        {
+                            // Call the resettingScaledQuantity function of the ScaledQuantity class to reset the scaled quantity of all ingredients
+                            ScaledQuantity.resettingScaledQuantity();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            // If there is no recipe, display an error message and return to the main menu
+                            Console.WriteLine("You need to input a recipe or change the scale of the quantity!");
+                            MainMenu();
+                        }
+
+                        
                         break;
                     case 5:
-                        // Call the ClearingData function of the Ingredients class to clear all data and start inputting a new recipe
-                        Ingredients.ClearingData();
-                        Ingredients.InputtingIngredients();
+
+                        if (myRecipe.NumOfIngri > 0)
+                        {
+                            // Call the ClearingData function of the Ingredients class to clear all data and start inputting a new recipe
+                            Ingredients.ClearingData();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            // If there is no recipe, display an error message and return to the main menu
+                            Console.WriteLine("You need to input a recipe");
+                            MainMenu();
+                        }
+
+                        
+                        
                         break;
                     case 6:
                         // Exit the program
@@ -106,6 +152,7 @@ namespace PartOne
                         // If the user enters an invalid option, display an error message
                         if (Global.MainMenuOption > 6)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You have inputted a number greater than 6, try again! \n");
                         }
                         break;

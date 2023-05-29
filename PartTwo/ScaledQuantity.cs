@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -88,9 +88,11 @@ namespace PartTwo
                         Console.WriteLine("You have successfully changed the quantity to triple.");
                         break;
                 }
+
+                // Call the MainMenu() method of the RecipeApp class to return to the main menu
+                RecipeApp.MainMenu();
             }
-            // Call the MainMenu() method of the RecipeApp class to return to the main menu
-            RecipeApp.MainMenu();
+           
         }
 
         // Create a static method to reset the scaled quantity

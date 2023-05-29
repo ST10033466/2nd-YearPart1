@@ -1,4 +1,4 @@
-﻿using PartTwo;
+using PartTwo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +17,12 @@ namespace PartTwo
         private static List<List<string>> caloriesList = new List<List<string>>();
         private static List<List<string>> foodGroupList = new List<List<string>>();
         private static List<List<string>> descriptionOfStepsList = new List<List<string>>();
+
+        // Define a delegate type for notifying the user
+        public delegate void RecipeCaloriesExceededHandler();
+
+        // Declare an event of the delegate type
+        public static event RecipeCaloriesExceededHandler RecipeCaloriesExceededEvent;
 
         // Property to access recipe names list
         public static List<List<string>> RecipeNamesList
@@ -175,6 +181,26 @@ namespace PartTwo
             RecipeApp.MainMenu();
         }
 
+        // This method calculates the total calories based on the provided list of calories.
+        private static int CalculateTotalCalories(List<string> calories)
+        {
+            int totalCalories = 0;
+            foreach (string calorie in calories)
+            {
+                if (int.TryParse(calorie, out int ingredientCalories))
+                {
+                    totalCalories += ingredientCalories;
+                }
+            }
+            return totalCalories;
+        }
+
+        // This method is called when the total calories of a recipe exceed 300.
+        private static void RecipeCaloriesExceededNotification()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Warning: The total calories of this recipe exceed 300.");
+        }
         // This method displays the list of recipes in alphabetical order by name.
         public static void DisplayRecipeList()
         {
@@ -275,8 +301,8 @@ namespace PartTwo
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Warning: The total calories of this recipe exceed 300.");
             }
-
-            Console.WriteLine("\nSteps:");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n          Steps");
             Console.WriteLine("*********************************");
 
             // Display the description of each step

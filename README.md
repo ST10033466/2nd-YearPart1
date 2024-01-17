@@ -1,4 +1,4 @@
-Welcome to Recipe World! Below are instructions on how to compile and run our software:
+Welcome to Recipe World! Below are instructions on how to compile and run my software:
 
 Color Codes in the Console Application:
 •	Cyan: Main Menu
